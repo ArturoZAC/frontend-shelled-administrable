@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { getGreeting } from "@/helpers/getGreeting";
+import { Outlet } from "react-router-dom";
 
 const userEmail = "arturoyz2105@gmail.com";
 const userName = "admin01";
@@ -50,7 +51,9 @@ export const AdminLayout = () => {
           </DropdownMenu>
         </div>
 
-        <div className="flex-1 p-6">{/* Aquí va tu contenido principal */}</div>
+        <div className="p-4">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

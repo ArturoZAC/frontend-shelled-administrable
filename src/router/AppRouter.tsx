@@ -7,6 +7,7 @@ import { DashboardPage } from "@/admin/pages/dashboard/DashboardPage";
 //AuthPages
 import { AuthLayout } from "@/auth/layouts/AuthLayout";
 import { LoginPage } from "@/auth/pages/login/LoginPage";
+import AgregarPage from "@/admin/pages/agregar/AgregarPage";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -16,6 +17,14 @@ export const AppRouter = createBrowserRouter([
       {
         path: "dashboard",
         element: <DashboardPage />,
+      },
+      {
+        path: "agregar",
+        element: <AgregarPage />,
+      },
+      {
+        index: true,
+        element: <Navigate to="dashboard" replace />,
       },
     ],
   },
