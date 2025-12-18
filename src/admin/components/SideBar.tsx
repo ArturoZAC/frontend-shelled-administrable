@@ -1,7 +1,10 @@
+import { useAuthStore } from "@/auth/store/auth.store";
 import { Button } from "@/components/ui/button";
 import { LayoutGrid, LogOut } from "lucide-react";
 
 export const SideBar = () => {
+  const { logout } = useAuthStore();
+
   return (
     <div className="w-64 border-r border-border bg-sidebar">
       <div className="p-6 flex flex-col h-full">
@@ -18,7 +21,11 @@ export const SideBar = () => {
           </nav>
         </div>
 
-        <Button variant={"destructive"} className="flex items-center gap-2 mt-auto">
+        <Button
+          variant={"destructive"}
+          className="flex items-center gap-2 mt-auto"
+          onClick={logout}
+        >
           <LogOut className="w-4 h-4" />
           Cerrar Sesion
         </Button>

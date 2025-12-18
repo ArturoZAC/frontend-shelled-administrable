@@ -11,9 +11,9 @@ export const LoginPage = () => {
 
           <LoginForm />
 
-          <p className="text-xs text-muted-foreground mt-6 text-center">
+          {/* <p className="text-xs text-muted-foreground mt-6 text-center">
             Credenciales de prueba: admin@example.com / password123
-          </p>
+          </p> */}
         </div>
       </div>
       <ImagenLogin />

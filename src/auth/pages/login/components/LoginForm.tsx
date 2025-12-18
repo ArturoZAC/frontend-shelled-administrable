@@ -5,11 +5,16 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { type LoginFormValues, loginSchema } from "../schemas/login.schema";
+import { useAuthStore } from "@/auth/store/auth.store";
+import { toast } from "sonner";
 
 export const LoginForm = () => {
+  const { login } = useAuthStore();
+
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -19,8 +24,15 @@ export const LoginForm = () => {
     },
   });
 
-  const onSubmit = (data: LoginFormValues) => {
-    console.log({ data });
+  const onSubmit = async (data: LoginFormValues) => {
+    reset();
+    const isSuccess = await login(data.email, data.password);
+
+    if (isSuccess) {
+      toast.success("Logeado correctamente");
+    } else {
+      toast.error("Credenciales incorrectas");
+    }
   };
 
   return (

@@ -5,4 +5,4 @@ export interface User {
   password: string;
 }
 
-export type authStatus = "checking" | "authenticated" | "no-authenticated";
+export type authStatus = "checking" | "authenticated" | "not-authenticated";

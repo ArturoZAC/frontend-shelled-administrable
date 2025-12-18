@@ -1,22 +1,33 @@
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { SideBar } from "../components/SideBar";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { getGreeting } from "@/helpers/getGreeting";
-import { Outlet } from "react-router-dom";
-
-const userEmail = "arturoyz2105@gmail.com";
-const userName = "admin01";
-const nameFormated = userName.charAt(0).toUpperCase() + userName.slice(1);
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuthStore } from "@/auth/store/auth.store";
 
 export const AdminLayout = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { authStatus, user } = useAuthStore();
+  const nameFormated = (user?.name ?? "").charAt(0).toUpperCase() + (user?.name ?? "").slice(1);
+
+  if (authStatus === "checking") {
+    return (
+      <div className="flex items-center justify-center h-screen bg-background">
+        <div className="flex flex-col items-center gap-4">
+          <div className="relative w-12 h-12">
+            <div className="absolute inset-0 rounded-full border-4 border-border"></div>
+            <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-primary animate-spin"></div>
+          </div>
+          <p className="text-sm font-medium text-muted-foreground">Cargando...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (authStatus === "not-authenticated") {
+    return <Navigate to="/auth/login" />;
+  }
 
   return (
     <div className="flex h-screen bg-background">
@@ -31,23 +42,23 @@ export const AdminLayout = () => {
               <button className="flex items-center gap-2 rounded-md px-2 py-1 transition-colors focus:outline-none">
                 <Avatar className="w-8 h-8">
                   <AvatarFallback className="uppercase font-bold text-lg">
-                    {userName[0]}
+                    {user?.name[0]}
                   </AvatarFallback>
                 </Avatar>
-                <span className="font-medium">{userName}</span>
-                <ChevronDown
+                <span className="font-medium">{user?.email}</span>
+                {/* <ChevronDown
                   className={`w-4 h-4 transition-transform duration-200 ${
                     isOpen ? "rotate-180" : ""
                   }`}
-                />
+                /> */}
               </button>
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent align="end" className="w-44 max-w-full">
+            {/* <DropdownMenuContent align="end" className="w-44 max-w-full">
               <DropdownMenuItem>Perfil</DropdownMenuItem>
               <DropdownMenuItem>Configuración</DropdownMenuItem>
               <DropdownMenuItem>Cerrar Sesión</DropdownMenuItem>
-            </DropdownMenuContent>
+            </DropdownMenuContent> */}
           </DropdownMenu>
         </div>
 
