@@ -32,7 +32,7 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
           variant="outline"
           size="sm"
           onClick={() => navigate(`/dashboard/edit/${service.id}`)}
-          className="flex-1"
+          className="flex-1 bg-blue-200 hover:bg-blue-300"
         >
           <Pencil className="w-4 h-4 mr-2" />
           Editar
@@ -44,6 +44,7 @@ export const ServiceCard = ({ service }: ServiceCardProps) => {
           className="text-destructive hover:text-destructive bg-destructive/10 hover:bg-destructive/20 flex-1"
         >
           <Trash2 className="w-4 h-4" />
+          Eliminar
         </Button>
       </CardFooter>
     </Card>

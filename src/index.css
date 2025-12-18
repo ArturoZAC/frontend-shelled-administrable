@@ -123,3 +123,13 @@
     font-family: "Montserrat", sans-serif;
   }
 }
+
+/* Altura mínima del editor */
+.ql-editor {
+  min-height: 120px; /* altura por defecto */
+}
+
+/* Para que el contenedor respete el tamaño */
+.ql-container {
+  height: auto;
+}

@@ -1,17 +1,22 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Image as ImageIcon, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+// import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { HeaderComponent } from "@/admin/components/HeaderComponent";
 import { serviceSchema, type ServiceForm } from "@/admin/schemas/service.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import ReactQuill from "react-quill-new";
 
 const AgregarPage = () => {
+  const quillModules = {
+    toolbar: [["bold", "italic"], [{ list: "bullet" }], ["link"], ["clean"]],
+  };
+
   const navigate = useNavigate();
   const [imagePreview, setImagePreview] = useState<string>("");
 
@@ -19,6 +24,7 @@ const AgregarPage = () => {
     register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors },
   } = useForm<ServiceForm>({
     resolver: zodResolver(serviceSchema),
@@ -76,7 +82,7 @@ const AgregarPage = () => {
               </div>
 
               {/* DESCRIPTION */}
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label htmlFor="description">Descripción</Label>
                 <Textarea
                   id="description"
@@ -84,6 +90,29 @@ const AgregarPage = () => {
                   className="min-h-[90px]"
                   {...register("description")}
                 />
+                {errors.description && (
+                  <p className="text-sm text-destructive">{errors.description.message}</p>
+                )}
+              </div> */}
+
+              <div className="space-y-2">
+                <Label htmlFor="description">Descripción</Label>
+
+                <Controller
+                  name="description"
+                  control={control}
+                  render={({ field }) => (
+                    <ReactQuill
+                      theme="snow"
+                      value={field.value}
+                      onChange={field.onChange}
+                      modules={quillModules}
+                      placeholder="Describe detalladamente el servicio..."
+                      className="bg-white"
+                    />
+                  )}
+                />
+
                 {errors.description && (
                   <p className="text-sm text-destructive">{errors.description.message}</p>
                 )}

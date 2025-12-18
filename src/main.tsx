@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 // import { RouterProvider } from "react-router-dom";
 // import { AppRouter } from "./router/AppRouter";
 
+import "react-quill-new/dist/quill.snow.css";
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
