@@ -6,6 +6,7 @@ type EnvsType = {
   SSR: boolean;
 
   VITE_API_URL: string;
+  VITE_API_URL_BASE: string;
 };
 
 export const getEnvs = () => {

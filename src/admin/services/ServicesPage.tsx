@@ -2,35 +2,38 @@ import { Button } from "@/components/ui/button";
 import { Briefcase, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { ServiceCard } from "./components/ServiceCard";
-import type { Service } from "./interfaces/service.interface";
-
-const initialServices: Service[] = [
-  {
-    id: "1",
-    title: "Desarrollo Web",
-    description: "Creación de sitios web modernos y responsivos con las últimas tecnologías.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=300&fit=crop",
-  },
-  {
-    id: "2",
-    title: "Diseño UI/UX",
-    description: "Diseño de interfaces intuitivas centradas en la experiencia del usuario.",
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=300&fit=crop",
-  },
-  {
-    id: "3",
-    title: "Consultoría Tech",
-    description: "Asesoramiento estratégico para transformación digital de empresas.",
-    image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&h=300&fit=crop",
-  },
-];
+import { useServiceQuery } from "./hooks/useServiceQuery";
 
 export const ServicesPage = () => {
   const navigate = useNavigate();
 
+  const { getAllServiceQuery } = useServiceQuery();
+
   const handleNavigateAgregar = () => {
-    navigate("/admin/agregar");
+    navigate("add");
   };
+
+  const services = getAllServiceQuery.data ?? [];
+
+  if (getAllServiceQuery.isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center py-16 gap-4 min-h-screen">
+        <div className="w-12 h-12 border-4 border-muted border-t-primary rounded-full animate-spin"></div>
+        <p className="text-lg font-medium text-muted-foreground">Cargando servicios...</p>
+      </div>
+    );
+  }
+
+  if (getAllServiceQuery.isError) {
+    return (
+      <p className="text-center py-16 text-destructive">
+        Error al cargar los servicios:{" "}
+        {getAllServiceQuery.error instanceof Error
+          ? getAllServiceQuery.error.message
+          : "Algo salió mal"}
+      </p>
+    );
+  }
 
   return (
     <main className="flex-1 p-8">
@@ -53,9 +56,9 @@ export const ServicesPage = () => {
         </div>
 
         {/* Services Grid */}
-        {initialServices.length > 0 ? (
+        {services.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {initialServices.map((service, index) => (
+            {services.map((service, index) => (
               <div key={service.id} style={{ animationDelay: `${index * 0.1}s` }}>
                 <ServiceCard service={service} />
               </div>

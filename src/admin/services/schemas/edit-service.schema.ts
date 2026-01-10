@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const addServiceSchema = z.object({
+export const editServiceSchema = z.object({
   title: z.string().min(1, "El titulo es requerido"),
   description: z.string().min(1, "La descripcion es requerida"),
   image: z
@@ -10,7 +10,8 @@ export const addServiceSchema = z.object({
     })
     .refine((file) => file.size <= 4 * 1024 * 1024, {
       message: "La imagen debe pesar menos de 4MB",
-    }),
+    })
+    .optional(),
 });
 
-export type AddServiceForm = z.infer<typeof addServiceSchema>;
+export type EditServiceForm = z.infer<typeof editServiceSchema>;

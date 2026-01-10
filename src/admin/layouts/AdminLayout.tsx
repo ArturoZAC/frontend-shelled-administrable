@@ -33,6 +33,7 @@ export const AdminLayout = () => {
     <div className="flex h-screen bg-background">
       <SideBar />
       <div className="flex-1 flex flex-col">
+        {/* <div className="flex-1 flex flex-col overflow-hidden"> */}
         <div className="border-b border-border p-4 flex justify-between items-center">
           <span className="text-lg md:text-xl lg:text-2xl font-semibold">
             {getGreeting()} {nameFormated}
@@ -53,7 +54,6 @@ export const AdminLayout = () => {
                 /> */}
               </button>
             </DropdownMenuTrigger>
-
             {/* <DropdownMenuContent align="end" className="w-44 max-w-full">
               <DropdownMenuItem>Perfil</DropdownMenuItem>
               <DropdownMenuItem>Configuración</DropdownMenuItem>
@@ -62,7 +62,8 @@ export const AdminLayout = () => {
           </DropdownMenu>
         </div>
 
-        <div className="p-4">
+        <div className="p-2 overflow-auto">
+          {/* <div className="flex-1 overflow-auto p-4"> */}
           <Outlet />
         </div>
       </div>

@@ -6,7 +6,7 @@ export const SideBar = () => {
   const { logout } = useAuthStore();
 
   return (
-    <div className="w-64 border-r border-border bg-sidebar">
+    <div className="w-60 border-r border-border bg-sidebar">
       <div className="p-6 flex flex-col h-full">
         <div>
           <h1 className="text-xl font-bold text-sidebar-foreground mb-8 mx-auto text-center">
