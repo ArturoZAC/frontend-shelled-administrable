@@ -1,18 +1,18 @@
 import { useState } from "react";
+import ReactQuill from "react-quill-new";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { Image as ImageIcon, X } from "lucide-react";
+import { toast } from "sonner";
+import { ImageIcon, X } from "lucide-react";
+import { HeaderComponent } from "@/admin/components/HeaderComponent";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-// import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
-import { HeaderComponent } from "@/admin/components/HeaderComponent";
-import { serviceSchema, type ServiceForm } from "@/admin/schemas/service.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import ReactQuill from "react-quill-new";
 
-const AgregarPage = () => {
+import { addServiceSchema, type AddServiceForm } from "../../schemas/add-service.schema";
+
+export const AddServicePage = () => {
   const quillModules = {
     toolbar: [["bold", "italic"], [{ list: "bullet" }], ["link"], ["clean"]],
   };
@@ -26,8 +26,8 @@ const AgregarPage = () => {
     setValue,
     control,
     formState: { errors },
-  } = useForm<ServiceForm>({
-    resolver: zodResolver(serviceSchema),
+  } = useForm<AddServiceForm>({
+    resolver: zodResolver(addServiceSchema),
     defaultValues: {
       title: "",
       description: "",
@@ -38,7 +38,7 @@ const AgregarPage = () => {
   const imageError = errors.image?.message;
   const imageErrorMessage = typeof imageError === "string" ? imageError : undefined;
 
-  const onSubmit = (data: ServiceForm) => {
+  const onSubmit = (data: AddServiceForm) => {
     console.log({ data });
     toast.success("Servicio añadido correctamente");
     navigate("/dashboard");
@@ -80,20 +80,6 @@ const AgregarPage = () => {
                 />
                 {errors.title && <p className="text-sm text-destructive">{errors.title.message}</p>}
               </div>
-
-              {/* DESCRIPTION */}
-              {/* <div className="space-y-2">
-                <Label htmlFor="description">Descripción</Label>
-                <Textarea
-                  id="description"
-                  placeholder="Describe detalladamente el servicio..."
-                  className="min-h-[90px]"
-                  {...register("description")}
-                />
-                {errors.description && (
-                  <p className="text-sm text-destructive">{errors.description.message}</p>
-                )}
-              </div> */}
 
               <div className="space-y-2">
                 <Label htmlFor="description">Descripción</Label>
@@ -180,5 +166,3 @@ const AgregarPage = () => {
     </div>
   );
 };
-
-export default AgregarPage;

@@ -2,12 +2,14 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 
 //AdminPages
 import { AdminLayout } from "@/admin/layouts/AdminLayout";
-import { DashboardPage } from "@/admin/pages/dashboard/DashboardPage";
 
 //AuthPages
 import { AuthLayout } from "@/auth/layouts/AuthLayout";
 import { LoginPage } from "@/auth/pages/login/LoginPage";
-import AgregarPage from "@/admin/pages/agregar/AgregarPage";
+
+import { ServicesPage } from "@/admin/services/ServicesPage";
+import { AddServicePage } from "@/admin/services/pages/add-service/AddServicePage";
+import { EditServicePage } from "@/admin/services/pages/edit-service/EditServicePage";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -15,17 +17,15 @@ export const AppRouter = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       {
-        path: "dashboard",
-        element: <DashboardPage />,
+        path: "services",
+        children: [
+          { index: true, element: <ServicesPage /> },
+          { path: "add", element: <AddServicePage /> },
+          { path: "edit/:idService", element: <EditServicePage /> },
+        ],
       },
-      {
-        path: "agregar",
-        element: <AgregarPage />,
-      },
-      {
-        index: true,
-        element: <Navigate to="dashboard" replace />,
-      },
+      { index: true, element: <Navigate to="services" replace /> },
+      { path: "*", element: <Navigate to="/admin/services" replace /> },
     ],
   },
   {

@@ -1,9 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { Briefcase, Plus } from "lucide-react";
-
 import { Button } from "@/components/ui/button";
+import { Briefcase, Plus } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { ServiceCard } from "./components/ServiceCard";
-
 import type { Service } from "./interfaces/service.interface";
 
 const initialServices: Service[] = [
@@ -27,7 +25,7 @@ const initialServices: Service[] = [
   },
 ];
 
-export const DashboardPage = () => {
+export const ServicesPage = () => {
   const navigate = useNavigate();
 
   const handleNavigateAgregar = () => {
