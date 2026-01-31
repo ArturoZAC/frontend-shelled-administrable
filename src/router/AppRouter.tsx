@@ -10,6 +10,12 @@ import { LoginPage } from "@/auth/pages/login/LoginPage";
 import { ServicesPage } from "@/admin/services/ServicesPage";
 import { AddServicePage } from "@/admin/services/pages/add-service/AddServicePage";
 import { EditServicePage } from "@/admin/services/pages/edit-service/EditServicePage";
+import { BannersPage } from "@/admin/banners/BannersPage";
+import { AddBannerPage } from "@/admin/banners/pages/add-banner/AddBannerPage";
+import { EditBannerPage } from "@/admin/banners/pages/edit-banner/EditBannerPage";
+import { ProductsPage } from "@/admin/products/ProductsPage";
+import { AddProductsPage } from "@/admin/products/pages/add-banner/AddProductsPage";
+import { EditProductsPage } from "@/admin/products/pages/edit-banner/EditProductsPage";
 
 export const AppRouter = createBrowserRouter([
   {
@@ -22,6 +28,22 @@ export const AppRouter = createBrowserRouter([
           { index: true, element: <ServicesPage /> },
           { path: "add", element: <AddServicePage /> },
           { path: "edit/:idService", element: <EditServicePage /> },
+        ],
+      },
+      {
+        path: "banners",
+        children: [
+          { index: true, element: <BannersPage /> },
+          { path: "add", element: <AddBannerPage /> },
+          { path: "edit/:idBanner", element: <EditBannerPage /> },
+        ],
+      },
+      {
+        path: "products",
+        children: [
+          { index: true, element: <ProductsPage /> },
+          { path: "add", element: <AddProductsPage /> },
+          { path: "edit/:idProduct", element: <EditProductsPage /> },
         ],
       },
       { index: true, element: <Navigate to="services" replace /> },

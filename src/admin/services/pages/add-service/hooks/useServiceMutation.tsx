@@ -8,11 +8,7 @@ export const useServicesMutation = () => {
     mutationFn: (formData: FormData) => createServiceAction(formData),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["services"] });
-      // console.log("Servicio creado correctamente");
     },
-    // onError: (error) => {
-    //   console.error("Error creando el servicio:", error);
-    // },
   });
 
   return { createServiceMutation };

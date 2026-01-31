@@ -5,9 +5,10 @@ import { useNavigate } from "react-router-dom";
 interface Properties {
   title: string;
   description: string;
+  name?: string;
 }
 
-export const HeaderComponent = ({ title, description }: Properties) => {
+export const HeaderComponent = ({ title, description, name = "Servicios" }: Properties) => {
   const navigate = useNavigate();
 
   return (
@@ -18,7 +19,7 @@ export const HeaderComponent = ({ title, description }: Properties) => {
         className="mb-4 -ml-2 text-muted-foreground hover:text-foreground"
       >
         <ArrowLeft className="w-4 h-4" />
-        Volver a Servicios
+        Volver a {name}
       </Button>
       <h1 className="text-3xl font-bold text-foreground">{title}</h1>
       {/* <h1 className="text-3xl font-bold text-foreground">Añadir Nuevo Servicio</h1> */}

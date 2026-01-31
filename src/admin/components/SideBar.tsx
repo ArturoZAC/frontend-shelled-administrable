@@ -1,6 +1,7 @@
 import { useAuthStore } from "@/auth/store/auth.store";
 import { Button } from "@/components/ui/button";
 import { LayoutGrid, LogOut } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const SideBar = () => {
   const { logout } = useAuthStore();
@@ -13,11 +14,30 @@ export const SideBar = () => {
             Dashboard Panel
           </h1>
 
-          <nav className="space-y-2">
-            <div className="flex items-center gap-3 px-4 py-2 rounded-lg bg-sidebar-primary text-sidebar-primary-foreground cursor-pointer">
-              <LayoutGrid className="w-5 h-5" />
-              <span className="font-medium">Servicios</span>
-            </div>
+          <nav className="space-y-2 flex flex-col gap-y-2">
+            <Link to={"/admin/banners"}>
+              <div className="flex items-center gap-3 px-4 py-2 rounded-lg bg-sidebar-primary text-sidebar-primary-foreground cursor-pointer">
+                <LayoutGrid className="w-5 h-5" />
+                <span className="font-medium">Banners</span>
+              </div>
+            </Link>
+            <Link to={"/admin/services"}>
+              <div className="flex items-center gap-3 px-4 py-2 rounded-lg bg-sidebar-primary text-sidebar-primary-foreground cursor-pointer">
+                <LayoutGrid className="w-5 h-5" />
+                <span className="font-medium">
+                  <Link to={"/admin/services"}>Servicios</Link>
+                </span>
+              </div>
+            </Link>
+
+            <Link to={"/admin/products"}>
+              <div className="flex items-center gap-3 px-4 py-2 rounded-lg bg-sidebar-primary text-sidebar-primary-foreground cursor-pointer">
+                <LayoutGrid className="w-5 h-5" />
+                <span className="font-medium">
+                  <Link to={"/admin/products"}>Productos</Link>
+                </span>
+              </div>
+            </Link>
           </nav>
         </div>
 
